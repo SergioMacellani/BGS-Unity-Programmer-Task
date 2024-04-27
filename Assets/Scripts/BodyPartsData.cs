@@ -59,6 +59,16 @@ public class BodyPartsData : ScriptableObject
         _ => null
     };
 
+    public List<BodyPart> this[BodyPartType type] => type switch
+    {
+        BodyPartType.Hair => Hair,
+        BodyPartType.Face => Face,
+        BodyPartType.Head => Head,
+        BodyPartType.Torso => Torso,
+        BodyPartType.Pelvis => Pelvis,
+        _ => null
+    };
+
     [Serializable]
     public class BodyPart
     {

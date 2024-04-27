@@ -16,6 +16,42 @@ public class CustomClothes : MonoBehaviour
         bodyParts.ForEach(x => x.UpdateRenderer(data));
     }
 
+    public void ChangeBodyPart(uint id, BodyPartType type)
+    {
+        var part = data[type, (int)id];
+        if (part == null) return;
+
+        bodyParts.Find(x => x.type == type).id = (int)id;
+        UpdateBodySprite();
+    }
+
+    public void ChangeBodyPartColor(BodyPartType type, Color r, Color g, Color b)
+    {
+        var part = bodyParts.Find(x => x.type == type);
+        part.rMask = r;
+        part.gMask = g;
+        part.bMask = b;
+        UpdateBodySprite();
+    }
+
+    public Color GetColor(BodyPartType pageIndex, int p1)
+    {
+        var part = bodyParts.Find(x => x.type == pageIndex);
+        switch (p1)
+        {
+            case 0:
+                return part.rMask;
+            case 1:
+                return part.gMask;
+            case 2:
+                return part.bMask;
+            default:
+                return Color.white;
+        }
+
+
+    }
+
 #if UNITY_EDITOR
     public void OnValidate()
     {
