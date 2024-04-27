@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001ec02ee1d26f1498852314ca1cd1c5, type: 3}
+  m_Name: BodyParts Data
+  m_EditorClassIdentifier: 
+  hats:
+  - bodyTag: wizardHat
+    layer: 2
+    rgbMask:
+      x: 1
+      y: 0
+      z: 1
+    backSprite: {fileID: 21300000, guid: d273fd8d9c097fc4abdfeaf71bc1a7f6, type: 3}
+    frontSprite: {fileID: 21300002, guid: d273fd8d9c097fc4abdfeaf71bc1a7f6, type: 3}
+    rightSprite: {fileID: 21300004, guid: d273fd8d9c097fc4abdfeaf71bc1a7f6, type: 3}
+    leftSprite: {fileID: 21300006, guid: d273fd8d9c097fc4abdfeaf71bc1a7f6, type: 3}
+  accessories:
+  - bodyTag: nerd_glasses
+    layer: 5
+    rgbMask:
+      x: 1
+      y: 0
+      z: 0
+    backSprite: {fileID: 21300000, guid: af8a6083c4de6f649981bb1804008dd5, type: 3}
+    frontSprite: {fileID: 21300002, guid: af8a6083c4de6f649981bb1804008dd5, type: 3}
+    rightSprite: {fileID: 21300004, guid: af8a6083c4de6f649981bb1804008dd5, type: 3}
+    leftSprite: {fileID: 21300006, guid: af8a6083c4de6f649981bb1804008dd5, type: 3}
+  heads:
+  - bodyTag: wizardHead
+    layer: 3
+    rgbMask:
+      x: 1
+      y: 0
+      z: 1
+    backSprite: {fileID: 21300000, guid: a48f0678de1a5b146b2ae0499499081e, type: 3}
+    frontSprite: {fileID: 21300002, guid: a48f0678de1a5b146b2ae0499499081e, type: 3}
+    rightSprite: {fileID: 21300004, guid: a48f0678de1a5b146b2ae0499499081e, type: 3}
+    leftSprite: {fileID: 21300006, guid: a48f0678de1a5b146b2ae0499499081e, type: 3}
+  shirt:
+  - bodyTag: wizardShirt
+    layer: 0
+    rgbMask:
+      x: 1
+      y: 0
+      z: 1
+    backSprite: {fileID: 21300000, guid: 05adfd24132e4a043aed31c60223c95f, type: 3}
+    frontSprite: {fileID: 21300002, guid: 05adfd24132e4a043aed31c60223c95f, type: 3}
+    rightSprite: {fileID: 21300004, guid: 05adfd24132e4a043aed31c60223c95f, type: 3}
+    leftSprite: {fileID: 21300006, guid: 05adfd24132e4a043aed31c60223c95f, type: 3}
+  pants:
+  - bodyTag: cowboy_pants
+    layer: 0
+    rgbMask:
+      x: 1
+      y: 0
+      z: 1
+    backSprite: {fileID: 21300000, guid: 286f5576e6a839b4d9ebc2259263d8f5, type: 3}
+    frontSprite: {fileID: 21300002, guid: 286f5576e6a839b4d9ebc2259263d8f5, type: 3}
+    rightSprite: {fileID: 21300004, guid: 286f5576e6a839b4d9ebc2259263d8f5, type: 3}
+    leftSprite: {fileID: 21300006, guid: 286f5576e6a839b4d9ebc2259263d8f5, type: 3}
+  shoes:
+  - bodyTag: wizardShoes
+    layer: 1
+    rgbMask:
+      x: 1
+      y: 0
+      z: 0
+    backSprite: {fileID: 21300000, guid: 56b62306095e9754188ef18da8d3f0e8, type: 3}
+    frontSprite: {fileID: 21300002, guid: 56b62306095e9754188ef18da8d3f0e8, type: 3}
+    rightSprite: {fileID: 21300004, guid: 56b62306095e9754188ef18da8d3f0e8, type: 3}
+    leftSprite: {fileID: 21300006, guid: 56b62306095e9754188ef18da8d3f0e8, type: 3}
+  beards:
+  - bodyTag: wizardBeard
+    layer: 4
+    rgbMask:
+      x: 1
+      y: 0
+      z: 0
+    backSprite: {fileID: 21300000, guid: af4ebd354ce005b47bb6b0e5f7bef99e, type: 3}
+    frontSprite: {fileID: 21300002, guid: af4ebd354ce005b47bb6b0e5f7bef99e, type: 3}
+    rightSprite: {fileID: 21300004, guid: af4ebd354ce005b47bb6b0e5f7bef99e, type: 3}
+    leftSprite: {fileID: 21300006, guid: af4ebd354ce005b47bb6b0e5f7bef99e, type: 3}
