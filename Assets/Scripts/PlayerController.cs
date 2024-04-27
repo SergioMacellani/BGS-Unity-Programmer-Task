@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    private PlayerInventoryData inventory;
+    [SerializeField]
+    private CustomClothes customClothes;
 
     [Space]
     [Header("Movement")]
