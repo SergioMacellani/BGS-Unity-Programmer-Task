@@ -23,15 +23,14 @@ public class PlayerController : MonoBehaviour
     private float speed = 5f;
 
     private static readonly int Horizontal = Animator.StringToHash("Horizontal");
-    private static readonly int Vertical = Animator.StringToHash("Vertical");
 
     #endregion
 
     #region Inputs
 
     private float HorizontalInput => Input.GetAxis("Horizontal");
-    private float VerticalInput => Input.GetAxis("Vertical");
-    private Vector2 MovementInput => new Vector2(HorizontalInput, VerticalInput);
+    private float SprintInput => Input.GetKey(KeyCode.LeftShift) ? 2f : 1f;
+    private Vector2 MovementInput => new Vector2(HorizontalInput*SprintInput, 0);
 
     #endregion
 
@@ -56,7 +55,12 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody2D.velocity = MovementInput * speed;
         animator.SetFloat(Horizontal, MovementInput.x);
-        animator.SetFloat(Vertical, MovementInput.y);
+        transform.localScale = MovementInput.x switch
+        {
+            > 0 => new Vector3(1, 1, 1),
+            < 0 => new Vector3(-1, 1, 1),
+            _ => transform.localScale
+        };
     }
 
     #endregion

@@ -13,23 +13,7 @@ public class CustomClothes : MonoBehaviour
 
     public void UpdateBodySprite()
     {
-        bodyParts.ForEach(x =>
-        {
-            if (!x.renderer) return;
-            if (x.id < 0)
-            {
-                x.renderer.sprite = null;
-                return;
-            }
-
-            var part = data[x.type, x.id];
-
-            x.renderer.sprite = part[BodyPartDirection.Front];
-            x.renderer.sortingOrder = (int)part.layer;
-            x.renderer.material.SetColor("_R", x.rMask);
-            x.renderer.material.SetColor("_G", x.gMask);
-            x.renderer.material.SetColor("_B", x.bMask);
-        });
+        bodyParts.ForEach(x => x.UpdateRenderer(data));
     }
 
 #if UNITY_EDITOR
@@ -51,7 +35,7 @@ public class BodyPartRenderer
 
     [Header("Settings")]
     public BodyPartType type;
-    public SpriteRenderer renderer;
+    public List<SpriteRenderer> renderer;
     public int id;
 
     [Space]
@@ -59,6 +43,39 @@ public class BodyPartRenderer
     public Color rMask;
     public Color gMask;
     public Color bMask;
+
+    public void UpdateRenderer(BodyPartsData data)
+    {
+        if (renderer == null) return;
+        if (id < 0)
+        {
+            renderer[0].sprite = null;
+            return;
+        }
+
+        var part = data[type, id];
+
+        Debug.Log(type);
+        if (part is BodyPartsData.BodyPartMirror mirror)
+        {
+            renderer[0].sprite = mirror[0];
+            renderer[1].sprite = mirror[1];
+
+            renderer[0].sortingOrder = (int)part.layer;
+            renderer[1].sortingOrder = (int)mirror.layerLeft;
+        }else
+        {
+            renderer[0].sprite = (Sprite)part;
+            renderer[0].sortingOrder = (int)part.layer;
+        }
+
+        foreach (var r in renderer)
+        {
+            r.material.SetColor("_R", rMask);
+            r.material.SetColor("_G", gMask);
+            r.material.SetColor("_B", bMask);
+        }
+    }
 
 #if UNITY_EDITOR
     public void OnValidate()
