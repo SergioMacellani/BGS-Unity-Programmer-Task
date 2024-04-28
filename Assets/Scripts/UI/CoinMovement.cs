@@ -7,10 +7,32 @@ namespace BGS.UI
     /// </summary>
     public class CoinMovement : MonoBehaviour
     {
-        // The target position for the coin to move towards
+        #region Variables
+
+        [Tooltip("The target position for the coin to move towards.")]
         private Vector2 _targetPosition;
-        // The time elapsed since the coin started moving
-        private float time = 0;
+        [Tooltip("The time elapsed since the coin started moving.")]
+        private float _time = 0;
+        
+        #endregion
+        
+        #region Unity Callbacks
+
+        /// <summary>
+        /// Updates the position of the coin every frame.
+        /// The coin moves towards the target position over time.
+        /// If the time elapsed is more than 1 second, the coin game object is destroyed.
+        /// </summary>
+        private void Update()
+        {
+            _time += Time.deltaTime;
+            transform.position = Vector2.Lerp(transform.position, _targetPosition, _time);
+            if (_time > 1) Destroy(gameObject);
+        }        
+        
+        #endregion
+        
+        #region Public Methods
 
         /// <summary>
         /// Initiates the movement of the coin towards the target position.
@@ -20,17 +42,7 @@ namespace BGS.UI
         {
             _targetPosition = targetPosition;
         }
-
-        /// <summary>
-        /// Updates the position of the coin every frame.
-        /// The coin moves towards the target position over time.
-        /// If the time elapsed is more than 1 second, the coin game object is destroyed.
-        /// </summary>
-        private void Update()
-        {
-            time += Time.deltaTime;
-            transform.position = Vector2.Lerp(transform.position, _targetPosition, time);
-            if (time > 1) Destroy(gameObject);
-        }
+        
+        #endregion
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using BGS.Character;
 using BGS.Data;
 using BGS.IO;
+using BGS.UI.Store;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -218,6 +219,8 @@ namespace BGS.UI
         
         #endregion
 
+        #region Unity Editor Only
+
 #if UNITY_EDITOR
         /// <summary>
         /// OnValidate is called when the script is loaded or a value is changed in the inspector.
@@ -228,5 +231,7 @@ namespace BGS.UI
             UpdateWindows();
         }
 #endif
+        
+        #endregion
     }
 }

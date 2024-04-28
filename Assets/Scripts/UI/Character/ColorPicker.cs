@@ -1,14 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace BGS.UI
+namespace BGS.UI.Character
 {
     /// <summary>
     /// This class represents a color picker UI component.
     /// </summary>
     public class ColorPicker : MonoBehaviour
     {
+        #region Variables
+        
         [Header("Color Picker")]
         [SerializeField]
         [Tooltip("The initial color of the color picker.")]
@@ -16,26 +19,28 @@ namespace BGS.UI
         [SerializeField]
         [Tooltip("The graphic target that will be updated with the selected color.")]
         private Graphic graphicTarget;
-
+        
         [Space]
         [Header("Color Bars")]
         [SerializeField]
         [Tooltip("The hue bar of the color picker.")]
-        private ColorBar HUEBar;
+        private ColorBar hueBar;
         [SerializeField]
         [Tooltip("The saturation bar of the color picker.")]
-        private ColorBar SaturationBar;
+        private ColorBar saturationBar;
         [SerializeField]
         [Tooltip("The value bar of the color picker.")]
-        private ColorBar ValueBar;
+        private ColorBar valueBar;
         
         [Tooltip("The event that will be triggered when the color changes.")]
-        internal Action<Color, int> onColorChanged;
+        internal Action<Color, int> ColorChanged;
 
         [Tooltip("The hue, saturation, and value of the selected color.")]
-        private float h, s, v;
+        private float _h, _s, _v;
         [Tooltip("The index of the selected color.")]
-        private int colorIndex;
+        private int _colorIndex;
+        
+        #endregion
 
         #region Unity Callbacks
 
@@ -58,7 +63,7 @@ namespace BGS.UI
         /// <param name="col">The color to set up the color picker with.</param>
         public void SetUpColorPicker(int colorIndex, Color col)
         {
-            this.colorIndex = colorIndex;
+            this._colorIndex = colorIndex;
             pickerColor = col;
             UpdateSlidersColor();
         }
@@ -68,15 +73,15 @@ namespace BGS.UI
         /// </summary>
         public void UpdateColor()
         {
-            pickerColor = Color.HSVToRGB(HUEBar.value, SaturationBar.value, ValueBar.value);
-            Color.RGBToHSV(pickerColor, out h, out s, out v);
+            pickerColor = Color.HSVToRGB(hueBar.value, saturationBar.value, valueBar.value);
+            Color.RGBToHSV(pickerColor, out _h, out _s, out _v);
 
-            HUEBar.barHandle.color = pickerColor;
-            SaturationBar.barHandle.color = pickerColor;
-            ValueBar.barHandle.color = pickerColor;
+            hueBar.barHandle.color = pickerColor;
+            saturationBar.barHandle.color = pickerColor;
+            valueBar.barHandle.color = pickerColor;
 
-            SaturationBar.barBackground.color = Color.HSVToRGB(h, 1, v);
-            ValueBar.barBackground.color = Color.HSVToRGB(h, s, 1);
+            saturationBar.barBackground.color = Color.HSVToRGB(_h, 1, _v);
+            valueBar.barBackground.color = Color.HSVToRGB(_h, _s, 1);
 
             UpdateGraphic();
         }
@@ -90,15 +95,15 @@ namespace BGS.UI
         /// </summary>
         private void UpdateSlidersColor()
         {
-            Color.RGBToHSV(pickerColor, out h, out s, out v);
+            Color.RGBToHSV(pickerColor, out _h, out _s, out _v);
 
-            HUEBar.barSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
-            SaturationBar.barSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
-            ValueBar.barSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
+            hueBar.barSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
+            saturationBar.barSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
+            valueBar.barSlider.onValueChanged.AddListener(delegate { UpdateColor(); });
 
-            HUEBar.value = h;
-            SaturationBar.value = s;
-            ValueBar.value = v;
+            hueBar.value = _h;
+            saturationBar.value = _s;
+            valueBar.value = _v;
 
             graphicTarget.color = pickerColor;
         }
@@ -109,7 +114,7 @@ namespace BGS.UI
         private void UpdateGraphic()
         {
             graphicTarget.color = pickerColor;
-            onColorChanged?.Invoke(pickerColor, colorIndex);
+            ColorChanged?.Invoke(pickerColor, _colorIndex);
         }
         
         #endregion

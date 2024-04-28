@@ -26,7 +26,7 @@ namespace BGS.Character
         private List<BodyPartRenderer> bodyParts;
 
         [Tooltip("The body part id the player had before previewing a new one.")]
-        private int lastIndex;
+        private int _lastIndex;
 
         #endregion
 
@@ -105,7 +105,7 @@ namespace BGS.Character
             if (part == null) return;
 
             var p = bodyParts.Find(x => x.type == type);
-            lastIndex = p.id;
+            _lastIndex = p.id;
             p.id = (int)id;
             UpdateBodySprite();
         }
@@ -115,7 +115,7 @@ namespace BGS.Character
         /// </summary>
         public void ExitPreview(BodyPartType type)
         {
-            bodyParts.Find(x => x.type == type).id = lastIndex;
+            bodyParts.Find(x => x.type == type).id = _lastIndex;
             UpdateBodySprite();
         }
 
@@ -152,6 +152,8 @@ namespace BGS.Character
         
         #endregion
 
+        #region Unity Editor Only
+
 #if UNITY_EDITOR
         /// <summary>
         /// This function is called when the script is loaded or a value is changed in the inspector.
@@ -163,6 +165,8 @@ namespace BGS.Character
             UpdateBodySprite();
         }
 #endif
+        
+        #endregion
     }
 
     /// <summary>
@@ -190,6 +194,11 @@ namespace BGS.Character
         public Color gMask;
         public Color bMask;
         
+        // Shader properties
+        private static readonly int R = Shader.PropertyToID("_R");
+        private static readonly int G = Shader.PropertyToID("_G");
+        private static readonly int B = Shader.PropertyToID("_B");
+
         #endregion
 
         #region Public Methods
@@ -218,9 +227,9 @@ namespace BGS.Character
 
             foreach (var r in renderer)
             {
-                r.material.SetColor("_R", rMask);
-                r.material.SetColor("_G", gMask);
-                r.material.SetColor("_B", bMask);
+                r.material.SetColor(R, rMask);
+                r.material.SetColor(G, gMask);
+                r.material.SetColor(B, bMask);
             }
         }
 
@@ -234,6 +243,8 @@ namespace BGS.Character
         
         #endregion
         
+        #region Unity Editor Only
+
 #if UNITY_EDITOR
         /// <summary>
         /// This function is called when the script is loaded or a value is changed in the inspector.
@@ -244,5 +255,7 @@ namespace BGS.Character
             partName = type.ToString();
         }
 #endif
+        
+        #endregion
     }
 }

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BGS.UI
+namespace BGS.UI.Character
 {
     public class BodyPartSelect : MonoBehaviour
     {
@@ -27,6 +27,5 @@ namespace BGS.UI
         }
         
         #endregion
-
     }
 }
