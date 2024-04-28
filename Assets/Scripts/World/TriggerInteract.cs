@@ -37,7 +37,6 @@ namespace BGS.World
             if (!_triggerStay) return;
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Interact");
                 onInteract.Invoke();
             }
         }

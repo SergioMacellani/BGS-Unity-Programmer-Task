@@ -128,7 +128,7 @@ namespace BGS.Character
         {
             if (_focusMode) return;
 
-            rigidbody2D.velocity = MovementInput * (speed * Time.deltaTime);
+            rigidbody2D.velocity = MovementInput * speed;
             animator.SetFloat(Horizontal, MovementInput.x);
             transform.localScale = MovementInput.x switch
             {

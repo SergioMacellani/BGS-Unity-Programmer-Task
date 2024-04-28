@@ -17,7 +17,7 @@ using UnityEngine;
                 serializedObject.Update();
 
                 GUILayout.Space(10);
-                var folderPath = UnityEditor.EditorGUILayout.TextField("Folder Path", "Assets/Mighty Heroes (Rogue) 2D Fantasy Characters Pack/Rogue");
+                var folderPath = UnityEditor.EditorGUILayout.TextField("Folder Path", "Assets/Packages/Mighty Heroes (Rogue) 2D Fantasy Characters Pack/Rogue");
                 if (GUILayout.Button("Search Sprites on Folder"))
                     SearchBodyParts(folderPath, data);
                 if (GUILayout.Button("Clear Data"))
@@ -49,27 +49,27 @@ using UnityEngine;
                     if (path.Contains("Hair") || path.Contains("Hood"))
                     {
                         if(!data.hair.Exists(x => x.bodyTag == name))
-                            data.hair.Add(new BodyPartsData.BodyPart(name, 13, asset));
+                            data.hair.Add(new BodyPartsData.BodyPart(name, 13, asset, -17.6f));
                     }
                     else if (path.Contains("Face"))
                     {
                         if(!data.face.Exists(x => x.bodyTag == name))
-                            data.face.Add(new BodyPartsData.BodyPart(name, 12, asset));
+                            data.face.Add(new BodyPartsData.BodyPart(name, 12, asset, 1.7f));
                     }
                     else if (path.Contains("Head"))
                     {
                         if(!data.head.Exists(x => x.bodyTag == name))
-                            data.head.Add(new BodyPartsData.BodyPart(name, 11, asset));
+                            data.head.Add(new BodyPartsData.BodyPart(name, 11, asset, -10.4f));
                     }
                     else if (path.Contains("Torso"))
                     {
                         if(!data.torso.Exists(x => x.bodyTag == name))
-                            data.torso.Add(new BodyPartsData.BodyPart(name, 7, asset));
+                            data.torso.Add(new BodyPartsData.BodyPart(name, 7, asset, 31));
                     }
                     else if (path.Contains("Pelvis"))
                     {
                         if(!data.pelvis.Exists(x => x.bodyTag == name))
-                            data.pelvis.Add(new BodyPartsData.BodyPart(name, 6, asset));
+                            data.pelvis.Add(new BodyPartsData.BodyPart(name, 6, asset, 18.5f));
                     }
                     else if (path.Contains("Shoulder"))
                     {
@@ -77,7 +77,7 @@ using UnityEngine;
 
                         name = name.Replace("_l_", "").Replace("_r_", "_");
                         if(!data.shoulder.Exists(x => x.bodyTag == name.Replace("_l_", "").Replace("_r_", "")))
-                            data.shoulder.Add(new BodyPartsData.BodyPartPairs(name, 5, 10, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset));
+                            data.shoulder.Add(new BodyPartsData.BodyPartPairs(name, 5, 10, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset, 20.7f));
                     }
                     else if (path.Contains("Elbow"))
                     {
@@ -85,7 +85,7 @@ using UnityEngine;
 
                         name = name.Replace("_l_", "").Replace("_r_", "_");
                         if(!data.elbow.Exists(x => x.bodyTag == name.Replace("_l_", "").Replace("_r_", "")))
-                            data.elbow.Add(new BodyPartsData.BodyPartPairs(name, 4, 9, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset));
+                            data.elbow.Add(new BodyPartsData.BodyPartPairs(name, 4, 9, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset, 16.3f));
                     }
                     else if (path.Contains("Wrist"))
                     {
@@ -93,7 +93,7 @@ using UnityEngine;
 
                         name = name.Replace("_l_", "").Replace("_r_", "_");
                         if(!data.wrist.Exists(x => x.bodyTag == name.Replace("_l_", "").Replace("_r_", "")))
-                            data.wrist.Add(new BodyPartsData.BodyPartPairs(name, 3, 8, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset));
+                            data.wrist.Add(new BodyPartsData.BodyPartPairs(name, 3, 8, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset, 23.2f));
                     }
                     else if (path.Contains("Leg"))
                     {
@@ -101,7 +101,7 @@ using UnityEngine;
 
                         name = name.Replace("_l_", "").Replace("_r_", "_");
                         if(!data.leg.Exists(x => x.bodyTag == name.Replace("_l_", "").Replace("_r_", "")))
-                            data.leg.Add(new BodyPartsData.BodyPartPairs(name, 2, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset));
+                            data.leg.Add(new BodyPartsData.BodyPartPairs(name, 2, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset, 51.4f));
                     }
                     else if (path.Contains("Boot"))
                     {
@@ -109,7 +109,7 @@ using UnityEngine;
 
                         name = name.Replace("_l_", "").Replace("_r_", "_");
                         if(!data.boot.Exists(x => x.bodyTag == name))
-                            data.boot.Add(new BodyPartsData.BodyPartPairs(name, 1, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset));
+                            data.boot.Add(new BodyPartsData.BodyPartPairs(name, 1, isLeft ? assetOtherSide : asset, !isLeft ? assetOtherSide : asset, 47.1f));
                     }
                 }
 

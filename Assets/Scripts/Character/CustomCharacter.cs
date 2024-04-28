@@ -25,9 +25,6 @@ namespace BGS.Character
         [Tooltip("The body parts of the character.")]
         private List<BodyPartRenderer> bodyParts;
 
-        [Tooltip("The body part id the player had before previewing a new one.")]
-        private int _lastIndex;
-
         #endregion
 
         #region Unity Callbacks
@@ -80,7 +77,9 @@ namespace BGS.Character
             var part = data[type, (int)id];
             if (part == null) return;
 
+            PlayerInventoryData.Instance.bodyPartsEquipped[(int)type].id = (int)id;
             bodyParts.Find(x => x.type == type).id = (int)id;
+            Debug.Log($"Changed {type} to {id}");
             UpdateBodySprite();
         }
 
@@ -93,6 +92,10 @@ namespace BGS.Character
             part.rMask = r;
             part.gMask = g;
             part.bMask = b;
+            
+            PlayerInventoryData.Instance.bodyPartsEquipped[(int)type].rMask = r;
+            PlayerInventoryData.Instance.bodyPartsEquipped[(int)type].gMask = g;
+            PlayerInventoryData.Instance.bodyPartsEquipped[(int)type].bMask = b;
             UpdateBodySprite();
         }
         
@@ -105,7 +108,6 @@ namespace BGS.Character
             if (part == null) return;
 
             var p = bodyParts.Find(x => x.type == type);
-            _lastIndex = p.id;
             p.id = (int)id;
             UpdateBodySprite();
         }
@@ -115,7 +117,7 @@ namespace BGS.Character
         /// </summary>
         public void ExitPreview(BodyPartType type)
         {
-            bodyParts.Find(x => x.type == type).id = _lastIndex;
+            bodyParts.Find(x => x.type == type).id = PlayerInventoryData.Instance.bodyPartsEquipped[(int)type].id;
             UpdateBodySprite();
         }
 

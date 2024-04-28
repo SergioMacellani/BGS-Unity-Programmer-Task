@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using BGS.Character;
 using BGS.Data;
@@ -67,7 +68,15 @@ namespace BGS.UI.Character
             gColor.GetComponent<Button>().onClick.AddListener(() => OpenColorPicker(1));
             bColor.GetComponent<Button>().onClick.AddListener(() => OpenColorPicker(2));
         }
-        
+
+        /// <summary>
+        /// Updates the body part items when the canvas group changes.
+        /// </summary>
+        private void OnCanvasGroupChanged()
+        {
+            UpdateBodyPartItems();
+        }
+
         #endregion
 
         #region Public Methods
@@ -132,9 +141,7 @@ namespace BGS.UI.Character
         private void UpdateBodyPartItems()
         {
             foreach (Transform child in bodyPartItemContainer)
-            {
                 Destroy(child.gameObject);
-            }
 
             uint id = 0;
             var data = BodyPartsData.Instance[pageIndex];
@@ -143,15 +150,17 @@ namespace BGS.UI.Character
             {
                 var bodyPartItem = Instantiate(bodyPartItemPrefab, bodyPartItemContainer);
                 var idInstantiate = id;
+                void ChangeBodyPartAction()
+                {
+                    customCharacter.ChangeBodyPart((uint)PlayerInventoryData.Instance.GetOwnedBodyParts(pageIndex)[(int)idInstantiate], pageIndex);
+                } ;
+                Sprite bodyPartSprite = bodyPart.bodyPartSprite;
+                float posYInHUD = bodyPart.posYInHUD;
+
                 if (bodyPart is BodyPartsData.BodyPartPairs pairs)
-                    bodyPartItem.SetUp(bodyPart.bodyPartSprite,
-                        () => customCharacter.ChangeBodyPart(idInstantiate, pageIndex),
-                        bodyPart.posYInHUD,
-                        pairs.bodyPartSpritePair);
+                    bodyPartItem.SetUp(bodyPartSprite, ChangeBodyPartAction, posYInHUD, pairs.bodyPartSpritePair);
                 else
-                    bodyPartItem.SetUp(bodyPart.bodyPartSprite,
-                        () => customCharacter.ChangeBodyPart(idInstantiate, pageIndex),
-                        bodyPart.posYInHUD);
+                    bodyPartItem.SetUp(bodyPartSprite, ChangeBodyPartAction, posYInHUD);
 
                 id++;
             }

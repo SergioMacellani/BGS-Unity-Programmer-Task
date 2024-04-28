@@ -80,7 +80,9 @@ namespace BGS.UI.Store
             PlayerInventoryData.Instance.bodyParts.Add(new BodyPartItem((int)id, _type));
             // Update the store items
             SetUpStoreItems(_type);
-
+            
+            CustomCharacter.Instance.ChangeBodyPart(id, _type);
+            
             // Save the data
             IOSystem.SaveFile(JsonUtility.ToJson(PlayerInventoryData.Instance), "data");
             JsonUtility.FromJsonOverwrite(IOSystem.LoadFile("data"), PlayerInventoryData.Instance);
@@ -105,7 +107,10 @@ namespace BGS.UI.Store
                 PlayerInventoryData.Instance.bodyParts.Find(i => i.id == id && i.type == _type));
             // Change the body part to the default one
             CustomCharacter.Instance.ChangeBodyPart(
-                (uint)PlayerInventoryData.Instance.bodyParts.First(i => i.type == _type).id, _type);
+                (uint)PlayerInventoryData.Instance.bodyParts.Find(i => i.type == _type && i.id != id).id, _type);
+
+            Debug.Log(
+                $"Sell body part {id} of type {_type}, now equipped: {PlayerInventoryData.Instance.bodyParts.Find(i => i.type == _type && i.id != id).id}");
             // Update the store items
             SetUpStoreItems(_type);
 
